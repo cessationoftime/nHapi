@@ -192,6 +192,88 @@ namespace NHapi.Base.Model
 			return ret;
 		}
 
+
+        /// <summary>
+        ///  Inserts a repetition of a given Structure into repetitions of that structure by name. For example, if the Group contains 10 repititions an OBX segment and an OBX is supplied with an index of 2, then this call would insert the new repetition at index 2. Note that in this case, the Set ID field in the OBX segments would also need to be renumbered manually.
+        ///  Throws: HL7Exception if the named Structure is not part of this Group, or if structure is non-repeating.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="index"></param>
+        /// <returns>The inserted structure</returns>
+        public IStructure insertRepetition(String name, int rep)
+        {
+            if (name == null || name.Length == 0)
+            {
+                throw new ArgumentNullException("Name may not be null/empty");
+            }
+
+            AbstractGroupItem item = GetGroupItem(name);
+
+            if (item == null)
+                throw new HL7Exception(name + " does not exist in the group " + GetType().FullName,
+                    HL7Exception.APPLICATION_INTERNAL_ERROR);
+
+
+            //verify that Structure is repeating ... 
+            bool repeats = item.IsRepeating;
+            if (!repeats)
+                throw new HL7Exception(
+                    "Can't create repetition #" + rep + " of Structure " + name + " - this Structure is non-repeating",
+                    HL7Exception.APPLICATION_INTERNAL_ERROR);
+
+            IStructure ret;
+
+            //create a new Structure, insert it in the list, and return it
+            Type classType = item.ClassType;
+            ret = tryToInstantiateStructure(classType, name);
+            item.Structures.Insert(rep, ret);
+
+
+            return ret;
+        }
+
+
+
+        /// <summary>
+        /// Removes a repetition of a given Structure objects by name. For example, if the Group contains 10 repititions an OBX segment and "OBX" is supplied with an index of 2, then this call would remove the 3rd repetition. Note that in this case, the Set ID field in the OBX segments would also need to be renumbered manually.
+        /// 
+        /// Throws: HL7Exception if the named Structure is not part of this Group.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="rep"></param>
+        /// <returns>The removed structure</returns>
+        public IStructure removeRepetition(String name, int rep)
+        {
+            if (name == null || name.Length == 0)
+            {
+                throw new ArgumentNullException("Name may not be null/empty");
+            }
+
+            AbstractGroupItem item = GetGroupItem(name);
+
+            if (item == null)
+                throw new HL7Exception(name + " does not exist in the group " + GetType().FullName,
+                    HL7Exception.APPLICATION_INTERNAL_ERROR);
+
+
+
+            bool repeats = item.IsRepeating;
+            if (!repeats)
+                throw new HL7Exception(
+                    "Can't create repetition #" + rep + " of Structure " + name + " - this Structure is non-repeating",
+                    HL7Exception.APPLICATION_INTERNAL_ERROR);
+
+
+            if (item.Structures.Count <= rep)
+            {
+                throw new HL7Exception("Invalid index: " + rep + ", structure " + name + " must be between 0 and "
+                        + (item.Structures.Count - 1));
+            }
+            var ret = item.Structures[rep];
+            item.Structures.RemoveAt(rep);
+            return ret;
+        }
+
 		/// <summary> Expands the group definition to include a segment that is not 
 		/// defined by HL7 to be part of this group (eg an unregistered Z segment). 
 		/// The new segment is slotted at the end of the group.  Thenceforward if 

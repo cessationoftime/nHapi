@@ -3,7 +3,7 @@ using NHapi.Base;
 using NHapi.Base.Log;
 using System;
 using NHapi.Model.V24.Segment;
-
+using System.Linq;
 using NHapi.Base.Model;
 
 namespace NHapi.Model.V24.Group
@@ -154,6 +154,56 @@ get{
 	public ORU_R01_OBSERVATION GetOBSERVATION(int rep) { 
 	   return (ORU_R01_OBSERVATION)this.GetStructure("OBSERVATION", rep);
 	}
+
+
+    /// <summary>
+    /// Inserts a specific repetition of OBSERVATION (a Group object)
+    /// </summary>
+    /// <param name="rep">index to insert at</param>
+    /// <param name="renumberSetIDs">should setIDs be renumbered after insert?</param>
+    /// <returns>the inserted group</returns>
+    public ORU_R01_OBSERVATION insertOBSERVATION(int rep, bool renumberSetIDs = true)
+    {
+        var obs = (ORU_R01_OBSERVATION)insertRepetition("OBSERVATION", rep);
+        if (renumberSetIDs) renumberObservationOBXSETIDs();
+        return obs;
+    }
+
+
+    /// <summary>
+    /// Renumbers the SETIDs of Observation/OBX segments
+    /// </summary>
+    public void renumberObservationOBXSETIDs()
+    {
+        var obs = getOBSERVATIONAll();
+
+        for (int x = 0; x < obs.Count(); x++)
+        {
+            obs[x].OBX.SetIDOBX.Value = (x + 1).ToString();
+        }
+    }
+
+    /// <summary>
+    /// Removes a specific repetition of OBSERVATION (a Group object)
+    /// </summary>
+    /// <param name="rep">index to remove at</param>
+    /// <param name="renumberSetIDs">should setIDs be renumbered after insert?</param>
+    /// <returns>The removed group</returns>
+    public ORU_R01_OBSERVATION removeOBSERVATION(int rep, bool renumberSetIDs = true)
+    {
+        var obs = (ORU_R01_OBSERVATION)removeRepetition("OBSERVATION", rep);
+        if (renumberSetIDs) renumberObservationOBXSETIDs();
+        return obs;
+    }
+
+    /// <summary>
+    /// get all Observation structures
+    /// </summary>
+    /// <returns></returns>
+    public ORU_R01_OBSERVATION[] getOBSERVATIONAll()
+    {
+        return this.GetAll("OBSERVATION").Cast<ORU_R01_OBSERVATION>().ToArray();
+    }
 
 	/** 
 	 * Returns the number of existing repetitions of ORU_R01_OBSERVATION 
