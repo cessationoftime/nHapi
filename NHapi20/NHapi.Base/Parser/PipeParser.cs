@@ -286,15 +286,17 @@ namespace NHapi.Base.Parser
 			MessageStructure structure = GetStructure(message);
 			IMessage m = InstantiateMessage(structure.messageStructure, version, structure.explicitlyDefined);
 
-			//MessagePointer ptr = new MessagePointer(this, m, getEncodingChars(message));
+            //MessagePointer ptr = new MessagePointer(this, m, getEncodingChars(message));
 			MessageIterator messageIter = new MessageIterator(m, "MSH", true);
 			FilterIterator.IPredicate segmentsOnly = new AnonymousClassPredicate(this);
 			FilterIterator segmentIter = new FilterIterator(messageIter, segmentsOnly);
-
+            
 			String[] segments = Split(message, segDelim);
 			EncodingCharacters encodingChars = GetEncodingChars(message);
 			for (int i = 0; i < segments.Length; i++)
 			{
+
+                //var i3 = m.GetORDER(0).ORDER_DETAIL.NTERepetitionsUsed;
 				//get rid of any leading whitespace characters ...
 				if (segments[i] != null && segments[i].Length > 0 && Char.IsWhiteSpace(segments[i][0]))
 					segments[i] = StripLeadingWhitespace(segments[i]);

@@ -99,5 +99,12 @@ namespace NHapi.Base.Model
 			: base(theFactory)
 		{
 		}
+
+        public override string ToString()
+        {
+              PipeParser parser = new PipeParser(new DefaultModelClassFactory());
+            return parser.Encode(this);
+ 
+        }
 	}
 }

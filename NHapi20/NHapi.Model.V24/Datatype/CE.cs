@@ -170,4 +170,9 @@ get{
 }
 
 }
+    public override string ToString()
+    {
+        return string.Format("{0}^{1}^{2}^{3}^{4}^{5}", this[0], this[1], this[2], this[3], this[4], this[5]);
+    }
+
 }}
