@@ -25,7 +25,7 @@ using NHapi.Base;
 using NHapi.Base.Parser;
 using NHapi.Base.Log;
 using System.Collections.Generic;
-
+using System.Linq;
 namespace NHapi.Base.Model
 {
 	/// <summary> A partial implementation of Group.  Subclasses correspond to specific
@@ -497,5 +497,17 @@ namespace NHapi.Base.Model
 
 			return name;
 		}
+
+        public override string ToString()
+        {
+            if (typeof(IComposite).IsAssignableFrom(this.GetType()))
+            {
+                IComposite ic = (IComposite)this;
+
+                return ic.Components.Select(x => x.ToString()).Aggregate((s, i) => s + " " + i);
+
+            }
+            return base.ToString();
+        }
 	}
 }

@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-
+using System.Linq;
 namespace NHapi.Base.Model
 {
 	/// <summary> An unspecified Composite datatype that has an undefined number of components, each 
@@ -57,5 +57,10 @@ namespace NHapi.Base.Model
 				return (IType) components[index];
 			}
 		}
+
+        public override string ToString()
+        {
+          return this.Components.Select(x => x.ToString()).Aggregate((s, i) => s + "^" + i);
+        }
 	}
 }

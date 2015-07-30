@@ -101,7 +101,7 @@ namespace NHapi.Base.Model
 		/// <summary> Returns the value of getValue() </summary>
 		public override String ToString()
 		{
-			return Value;
+            return myValue;
 		}
 	}
 }

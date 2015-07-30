@@ -5,6 +5,7 @@ using System;
 using NHapi.Model.V251.Segment;
 using System.Linq;
 using NHapi.Base.Model;
+using System.Collections.Generic;
 
 namespace NHapi.Model.V251.Group
 {
@@ -239,6 +240,17 @@ get{
         var obs = (ORU_R01_OBSERVATION)removeRepetition("OBSERVATION", rep);
         if (renumberSetIDs) renumberObservationOBXSETIDs();
         return obs;
+    }
+
+    public ORU_R01_OBSERVATION[] removeOBSERVATIONAll()
+    {
+        IEnumerable<int> range = Enumerable.Range(0, OBSERVATIONRepetitionsUsed);
+
+        var obs = range.Select(x => removeOBSERVATION(0, false)).ToArray();
+
+      //  if (renumberSetIDs) renumberObservationOBXSETIDs();
+        return obs;
+
     }
 
     /// <summary>

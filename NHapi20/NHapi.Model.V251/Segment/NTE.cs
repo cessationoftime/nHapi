@@ -4,7 +4,7 @@ using NHapi.Base.Parser;
 using NHapi.Base.Model;
 using NHapi.Model.V251.Datatype;
 using NHapi.Base.Log;
-
+using System.Linq;
 namespace NHapi.Model.V251.Segment{
 
 ///<summary>
@@ -167,5 +167,8 @@ catch (HL7Exception he) {
 	}
   }
 
-
+    public override string ToString()
+    {
+        return this.SetIDNTE + "|" + this.SourceOfComment + "|" + string.Join("^", this.GetComment().Select(x => x.ToString()).ToArray()) + "|" + this.CommentType;
+    }
 }}

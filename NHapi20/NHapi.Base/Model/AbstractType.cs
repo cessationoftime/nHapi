@@ -26,7 +26,7 @@
 */
 
 using System;
-
+using System.Linq;
 namespace NHapi.Base.Model
 {
 	/// <summary> An abstract Type that provides a default implementation of getName(). 
@@ -95,5 +95,6 @@ namespace NHapi.Base.Model
 			this.description = description;
 			this.message = message;
 		}
+
 	}
 }
