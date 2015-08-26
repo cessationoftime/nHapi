@@ -36,7 +36,7 @@ namespace NHapi.Base.validation.impl
 		public DefaultValidation()
 		{
 			IRule trim = new TrimLeadingWhitespace();
-			PrimitiveRuleBindings.Add(new RuleBinding("*", "FT", trim));
+		//	PrimitiveRuleBindings.Add(new RuleBinding("*", "FT", trim));
 			PrimitiveRuleBindings.Add(new RuleBinding("*", "ST", trim));
 			PrimitiveRuleBindings.Add(new RuleBinding("*", "TX", trim));
 
@@ -47,8 +47,8 @@ namespace NHapi.Base.validation.impl
 			PrimitiveRuleBindings.Add(new RuleBinding("*", "IS", size200));
 		}
 	}
-
-	public class StrictValidation : DefaultValidation
+    
+    public class StrictValidation : DefaultValidation
 	{
 		public StrictValidation()
 		{

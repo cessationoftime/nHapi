@@ -120,10 +120,11 @@ namespace NHapi.Base.Parser
 				else
 					result.Append(textAsChar[i]);
 			}
-			if (result.Length > 0)
-				return result.ToString().Trim();
-			else
-				return "";
+            if (result.Length > 0)
+                //return result.ToString().Trim();
+                return result.ToString();
+            else
+                return "";
 		}
 
 		/// <summary>
