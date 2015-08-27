@@ -35,10 +35,10 @@ namespace NHapi.Base.validation.impl
 	{
 		public DefaultValidation()
 		{
-			IRule trim = new TrimLeadingWhitespace();
+			//IRule trim = new TrimLeadingWhitespace();
 		//	PrimitiveRuleBindings.Add(new RuleBinding("*", "FT", trim));
-			PrimitiveRuleBindings.Add(new RuleBinding("*", "ST", trim));
-			PrimitiveRuleBindings.Add(new RuleBinding("*", "TX", trim));
+			//PrimitiveRuleBindings.Add(new RuleBinding("*", "ST", trim));
+			//PrimitiveRuleBindings.Add(new RuleBinding("*", "TX", trim));
 
 			IRule size200 = new SizeRule(200);
 			IRule size65536 = new SizeRule(65536);
