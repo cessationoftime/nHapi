@@ -29,7 +29,7 @@ public class ORM_O01_ORDER : AbstractGroup {
 	public ORM_O01_ORDER(IGroup parent, IModelClassFactory factory) : base(parent, factory){
 	   try {
 	      this.add(typeof(ORC), true, false);
-	      this.add(typeof(ORM_O01_ORDER_DETAIL), false, false);
+          this.add(typeof(ORM_O01_ORDER_DETAIL), false, false);
 	      this.add(typeof(FT1), false, true);
 	      this.add(typeof(CTI), false, true);
 	      this.add(typeof(BLG), false, false);

@@ -1,6 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".paket", ".paket", "{03CE9B75-9EC0-4B97-B342-2136D7ECB606}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\paket.dependencies = ..\..\paket.dependencies
+	EndProjectSection
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NHapi.Base", "nHapi.Base\NHapi.Base.csproj", "{5A080123-0597-46C3-AE78-2007EFB0DD68}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelGenerator", "ModelGenerator\ModelGenerator.csproj", "{EBB8E9C9-7FF2-49C4-96EF-C5B87E4C2617}"

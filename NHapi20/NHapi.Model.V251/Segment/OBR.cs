@@ -89,7 +89,7 @@ public class OBR : AbstractSegment  {
        this.add(typeof(XCN), false, 0, 250, new System.Object[]{message}, "Collector Identifier");
        this.add(typeof(ID), false, 1, 1, new System.Object[]{message, 65}, "Specimen Action Code");
        this.add(typeof(CE), false, 1, 250, new System.Object[]{message}, "Danger Code");
-       this.add(typeof(ST), false, 1, 300, new System.Object[]{message}, "Relevant Clinical Information");
+       this.add(typeof(ST), false, 0, 300, new System.Object[]{message}, "Relevant Clinical Information");
        this.add(typeof(TS), false, 1, 26, new System.Object[]{message}, "Specimen Received Date/Time");
        this.add(typeof(SPS), false, 1, 300, new System.Object[]{message}, "Specimen Source");
        this.add(typeof(XCN), false, 0, 250, new System.Object[]{message}, "Ordering Provider");
